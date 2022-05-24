@@ -27,7 +27,7 @@ services:
       context: .
       dockerfile: DevOpsLearningAppWeb/Dockerfile
     environment:
-      BACKEND_BASE_URL: "http://10.0.0.29:5000/api"
+      BACKEND_BASE_URL: "http://3.72.251.204:5000/api"
     ports:
       - "5006:80"
     depends_on:
