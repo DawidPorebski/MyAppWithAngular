@@ -1,1 +1,1 @@
-# MyAppWithAngular
+# DevOpsLearningApp

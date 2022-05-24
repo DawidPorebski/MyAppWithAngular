@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+  testpostgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  devopslearningapp:
+    image: ${DOCKER_REGISTRY-}devopslearningapp
+    restart: always
+    build:
+      context: .
+      dockerfile: DevOpsLearningApp/Dockerfile
+    ports:
+      - 5000:80
+    depends_on:
+      - "testpostgres"
+
+  devopslearningappweb:
+    image: ${DOCKER_REGISTRY-}devopslearningappweb
+    build:
+      context: .
+      dockerfile: DevOpsLearningAppWeb/Dockerfile
+    environment:
+      BACKEND_BASE_URL: "http://localhost:5000/api"
+    ports:
+      - "5006:80"
+    depends_on:
+      - "devopslearningapp"
+
+volumes:
+  pgdata:

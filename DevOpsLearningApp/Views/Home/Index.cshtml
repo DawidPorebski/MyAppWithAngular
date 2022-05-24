@@ -1,0 +1,36 @@
+﻿@using DevOpsLearningApp.Database
+@model IEnumerable<MyEntity>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <form style="margin-top: 20px">
+        <button asp-action="AddRow">Dodaj wiersz</button>
+        <button asp-action="RemoveAllRows" style="margin-left: 20px">Usuń wszystkie wiersze</button>
+    </form>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
